@@ -1,7 +1,6 @@
 package entities;
 
 import java.time.LocalDate;
-import java.util.Objects;
 
 public class Person {
     private String id;
@@ -132,6 +131,26 @@ public class Person {
 
     public void setActiveStatus(boolean activeStatus) {
         this.activeStatus = activeStatus;
+    }
+    public void displayInfo(){
+        System.out.println("Id: " + id);
+        System.out.println("FirstName: " + firstName);
+        System.out.println("Lastname: " + lastName);
+        System.out.println("Date of Birth: " + dateOfBirth);
+        System.out.println("Gender: " + gender);
+        System.out.println("Phone Number: " + phoneNumber);
+        System.out.println("Email: " + email);
+        System.out.println("Address: " + address);
+        System.out.println("National ID: " + nationalId);
+        System.out.println("Age: " + age);
+        System.out.println("Active Status: " + activeStatus);
+    }
+    public void displaysummary(){
+        System.out.println("Id: " + id);
+        System.out.println("Full Name: " + getFullName());
+    }
+    public String getFullName(){
+        return firstName +" "+lastName;
     }
 }
 
