@@ -1,5 +1,7 @@
 package entities;
 
+import org.w3c.dom.DOMStringList;
+
 import java.time.LocalDate;
 
 public class Person {
@@ -32,6 +34,11 @@ private boolean active;
         this.age = age;
         this.active = active;
     }
-
+    //overloaded
+public Person(String id, String firstName, String List){
+        this.id = id;
+        this.firstName = firstName;
+        this.lastName = lastName;
+}
 
 }
