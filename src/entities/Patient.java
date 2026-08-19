@@ -62,4 +62,19 @@ public class Patient extends Person {
         }
     }
 
+    public void addRecordId(String recordId) {
+        recordIds.add(recordId);
+    }
+
+    public int getRecordCount() {
+        return recordIds.size();
+    }
+
+    public void addToBalance(double amount) {
+        outstandingBalance += amount;
+    }
+
+    public void clearBalance() {
+        outstandingBalance = 0;
+    }
 }
