@@ -26,6 +26,7 @@ public class Nurse extends Person {
         this.assignedPatientIds = new ArrayList();
         this.yearsOfService = yearsOfService;
     }
+
     @Override
     public void displayInfo() {
 
@@ -36,6 +37,7 @@ public class Nurse extends Person {
         IO.println("Assigned Patient IDs: " + assignedPatientIds);
         IO.println("Years of Service: " + yearsOfService);
     }
+
     public void assignPatient(String patientId) {
         assignedPatientIds.add(patientId);
     }
@@ -43,11 +45,31 @@ public class Nurse extends Person {
     public void unassignPatient(String patientId) {
         assignedPatientIds.remove(patientId);
     }
+
     public int getPatientLoad() {
         return assignedPatientIds.size();
     }
 
-    public boolean isNightShift() {
-        return shift.equals("Night");
+    public void setYearsOfService(int yearsOfService) {
+        if (yearsOfService < 0) {
+            IO.println("Years of service cannot be negative");
+            return;
+        }
+
+        this.yearsOfService = yearsOfService;
+    }
+
+    public void setShift(String shift) {
+
+        if (shift == null ||
+                (!shift.equals("Morning") &&
+                        !shift.equals("Evening") &&
+                        !shift.equals("Night"))) {
+
+            IO.println("Shift must be Morning, Evening, or Night");
+            return;
+        }
+
+        this.shift = shift;
     }
 }
