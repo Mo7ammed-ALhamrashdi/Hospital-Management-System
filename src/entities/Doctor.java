@@ -39,4 +39,15 @@ public class Doctor extends Person {
         System.out.println("Assigned Patient IDs: " + assignedPatientIds);
         System.out.println("On Call: " + isOnCall);
     }
+    public void addSlot(String slot) {
+        availableSlots.add(slot);
+    }
+
+    public void removeSlot(String slot) {
+        availableSlots.remove(slot);
+    }
+
+    public boolean hasSlot(String slot) {
+        return availableSlots.contains(slot);
+    }
 }
