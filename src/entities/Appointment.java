@@ -141,4 +141,12 @@ public class Appointment {
     public boolean isPast(LocalDate date) {
         return appointmentDate.isBefore(date);
     }
+    public void addNotes(String notes) {
+        reason = reason + " " + notes;
+    }
+
+    public void addNotes(String notes, String author) {
+        reason = reason + " " + notes + " - " + author;
+    }
 }
+
