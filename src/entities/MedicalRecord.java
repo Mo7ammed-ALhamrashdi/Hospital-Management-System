@@ -26,5 +26,84 @@ public class MedicalRecord {
         this.notes = notes;
         this.isConfidential = isConfidential;
     }
+// Getter
+    public String getRecordId() {
+        return recordId;
+    }
 
+    public String getPatientId() {
+        return patientId;
+    }
+
+    public String getDoctorId() {
+        return doctorId;
+    }
+
+    public LocalDate getVisitDate() {
+        return visitDate;
+    }
+
+    public String getDiagnosis() {
+        return diagnosis;
+    }
+
+    public String getPrescription() {
+        return prescription;
+    }
+
+    public String getNotes() {
+        return notes;
+    }
+
+    public boolean isConfidential() {
+        return isConfidential;
+    }
+//Setter
+    public void setRecordId(String recordId) {
+        this.recordId = recordId;
+    }
+
+    public void setPatientId(String patientId) {
+        this.patientId = patientId;
+    }
+
+    public void setDoctorId(String doctorId) {
+        this.doctorId = doctorId;
+    }
+
+    public void setVisitDate(LocalDate visitDate) {
+        this.visitDate = visitDate;
+    }
+
+    public void setDiagnosis(String diagnosis) {
+        this.diagnosis = diagnosis;
+    }
+
+    public void setPrescription(String prescription) {
+        this.prescription = prescription;
+    }
+
+    public void setNotes(String notes) {
+        this.notes = notes;
+    }
+
+    public void setConfidential(boolean confidential) {
+        isConfidential = confidential;
+    }
+    public void displayInfo() {
+        IO.println("Record ID: " + recordId);
+        IO.println("Patient ID: " + patientId);
+        IO.println("Doctor ID: " + doctorId);
+        IO.println("Visit Date: " + visitDate);
+        IO.println("Diagnosis: " + diagnosis);
+        IO.println("Prescription: " + prescription);
+        IO.println("Notes: " + notes);
+        IO.println("Confidential: " + isConfidential);
+    }
+    public void appendNote(String extraNote) {
+        notes = notes + "       " + extraNote;
+    }
+    public void markConfidential() {
+        isConfidential = true;
+    }
 }
