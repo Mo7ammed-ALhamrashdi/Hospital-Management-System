@@ -34,10 +34,9 @@ public class Nurse extends Person {
 
         IO.println("Department ID: " + departmentId);
         IO.println("Shift: " + shift);
-        IO.println("Assigned Patient IDs: " + assignedPatientIds);
+        IO.println("Assigned Patients: " + assignedPatientIds);
         IO.println("Years of Service: " + yearsOfService);
     }
-
     public void assignPatient(String patientId) {
         assignedPatientIds.add(patientId);
     }
@@ -72,4 +71,9 @@ public class Nurse extends Person {
 
         this.shift = shift;
     }
+
+    public boolean isNightShift() {
+        return shift.equals("Night");
+    }
 }
+

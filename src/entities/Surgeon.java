@@ -32,10 +32,9 @@ import java.util.ArrayList;
         public void displayInfo() {
 
             super.displayInfo();
-
-            System.out.println("Surgeries Performed: " + surgeriesPerformed);
-            System.out.println("Operation Theatre Access: " + operationTheatreAccess);
-            System.out.println("Upcoming Surgery Dates: " + upcomingSurgeryDates);
+            IO.println("Surgeries Performed: " + surgeriesPerformed);
+            IO.println("Operation Theatre Access: " + operationTheatreAccess);
+            IO.println("Upcoming Surgery Dates: " + upcomingSurgeryDates);
         }
 
         public void performSurgery() {

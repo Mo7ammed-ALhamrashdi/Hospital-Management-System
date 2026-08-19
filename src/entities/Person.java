@@ -151,17 +151,16 @@ public class Person {
     }
 
     public void displayInfo() {
-        IO.println("Id: " + id);
-        IO.println("FirstName: " + firstName);
-        IO.println("Lastname: " + lastName);
+        IO.println("ID: " + id);
+        IO.println("Name: " + getFullName());
         IO.println("Date of Birth: " + dateOfBirth);
         IO.println("Gender: " + gender);
-        IO.println("Phone Number: " + phoneNumber);
+        IO.println("Phone: " + phoneNumber);
         IO.println("Email: " + email);
         IO.println("Address: " + address);
         IO.println("National ID: " + nationalId);
         IO.println("Age: " + age);
-        IO.println("Active Status: " + activeStatus);
+        IO.println("Active: " + activeStatus);
     }
 
     public void displaysummary() {

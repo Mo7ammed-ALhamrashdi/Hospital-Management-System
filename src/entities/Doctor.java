@@ -10,34 +10,36 @@ public class Doctor extends Person {
     private ArrayList assignedPatientIds;
     private boolean isOnCall;
 
-    public Doctor(String id, String firstName,
-                  String lastName, LocalDate dateOfBirth,
-                  String gender, String phoneNumber,
-                  String email, String address,
+    public Doctor(String id, String firstName, String lastName,
+                  LocalDate dateOfBirth, String gender,
+                  String phoneNumber, String email, String address,
                   String nationalId, int age, boolean activeStatus,
                   String specialization, int experienceYears,
-                  double consultationFee, ArrayList availableSlots,
-                  ArrayList assignedPatientIds, boolean isOnCall) {
-        super(id, firstName, lastName, dateOfBirth,
-                gender, phoneNumber, email, address,
+                  double consultationFee, boolean isOnCall) {
+
+        super(id, firstName, lastName,
+                dateOfBirth, gender,
+                phoneNumber, email, address,
                 nationalId, age, activeStatus);
+
         this.specialization = specialization;
         this.experienceYears = experienceYears;
         this.consultationFee = consultationFee;
-        this.availableSlots = availableSlots;
-        this.assignedPatientIds = assignedPatientIds;
         this.isOnCall = isOnCall;
 
+        availableSlots = new ArrayList();
+        assignedPatientIds = new ArrayList();
     }
     @Override
     public void displayInfo() {
         super.displayInfo();
-        System.out.println("Specialization: " + specialization);
-        System.out.println("Experience Years: " + experienceYears);
-        System.out.println("Consultation Fee: " + consultationFee);
-        System.out.println("Available Slots: " + availableSlots);
-        System.out.println("Assigned Patient IDs: " + assignedPatientIds);
-        System.out.println("On Call: " + isOnCall);
+
+        IO.println("Specialization: " + specialization);
+        IO.println("Experience Years: " + experienceYears);
+        IO.println("Consultation Fee: " + consultationFee);
+        IO.println("Available Slots: " + availableSlots);
+        IO.println("Assigned Patients: " + assignedPatientIds);
+        IO.println("On Call: " + isOnCall);
     }
     public void setExperienceYears(int experienceYears) {
         if (experienceYears < 0) {
@@ -45,6 +47,15 @@ public class Doctor extends Person {
             return;
         }
         this.experienceYears = experienceYears;
+    }
+    public void updateFee(double fee) {
+        setConsultationFee(fee);
+    }
+
+    public void updateFee(double fee, String reason) {
+        setConsultationFee(fee);
+
+        System.out.println("Fee updated because: " + reason);
     }
     public void setConsultationFee(double consultationFee) {
         if (consultationFee < 0) {
