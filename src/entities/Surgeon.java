@@ -28,4 +28,26 @@ import java.util.ArrayList;
             this.operationTheatreAccess = operationTheatreAccess;
             this.upcomingSurgeryDates = new ArrayList();
         }
-}
+        @Override
+        public void displayInfo() {
+
+            super.displayInfo();
+
+            System.out.println("Surgeries Performed: " + surgeriesPerformed);
+            System.out.println("Operation Theatre Access: " + operationTheatreAccess);
+            System.out.println("Upcoming Surgery Dates: " + upcomingSurgeryDates);
+        }
+
+        public void performSurgery() {
+            surgeriesPerformed++;
+        }
+
+        public void scheduleSurgery(LocalDate date) {
+            upcomingSurgeryDates.add(date);
+        }
+
+        public int getUpcomingCount() {
+            return upcomingSurgeryDates.size();
+        }
+    }
+
