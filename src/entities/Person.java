@@ -33,12 +33,13 @@ public class Person {
         setAge(age);
         setActiveStatus(activeStatus);
     }
+
     // Overloaded constructor
     public Person(String id, String firstName, String lastName) {
         setId(id);
         setFirstName(firstName);
         setLastName(lastName);
-}
+    }
 //Getter
 
     public String getId() {
@@ -85,10 +86,10 @@ public class Person {
         return activeStatus;
     }
 
-//Setter
+    //Setter
     public void setId(String id) {
         this.id = id;
-        if (id == null || id.trim().isEmpty()){
+        if (id == null || id.trim().isEmpty()) {
 
         }
     }
@@ -132,7 +133,8 @@ public class Person {
     public void setActiveStatus(boolean activeStatus) {
         this.activeStatus = activeStatus;
     }
-    public void displayInfo(){
+
+    public void displayInfo() {
         IO.println("Id: " + id);
         IO.println("FirstName: " + firstName);
         IO.println("Lastname: " + lastName);
@@ -145,13 +147,53 @@ public class Person {
         IO.println("Age: " + age);
         IO.println("Active Status: " + activeStatus);
     }
-    public void displaysummary(){
+
+    public void displaysummary() {
         IO.println("Id: " + id);
         IO.println("Full Name: " + getFullName());
     }
-    public String getFullName(){
-        return firstName +" "+lastName;
+
+    public String getFullName() {
+        return firstName + " " + lastName;
+    }
+
+    @Override
+    public String toString() {
+        return "Person{" +
+                "id='" + id + '\'' +
+                ", firstName='" + firstName + '\'' +
+                ", lastName='" + lastName + '\'' +
+                ", dateOfBirth=" + dateOfBirth +
+                ", gender='" + gender + '\'' +
+                ", phoneNumber='" + phoneNumber + '\'' +
+                ", email='" + email + '\'' +
+                ", address='" + address + '\'' +
+                ", nationalId='" + nationalId + '\'' +
+                ", age=" + age +
+                ", activeStatus=" + activeStatus +
+                '}';
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+
+        if (this == obj) {
+            return true;
+        }
+
+        if (!(obj instanceof Person)) {
+            return false;
+        }
+
+        Person other = (Person) obj;
+
+        return id.equals(other.id);
+    }
+
+    public boolean isAdult() {
+        return age >= 18;
     }
 }
+
 
 
