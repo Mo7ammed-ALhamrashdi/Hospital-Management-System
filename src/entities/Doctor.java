@@ -1,4 +1,32 @@
 package entities;
+import java.time.LocalDate;
+import java.util.ArrayList;
 
-public class Doctor {
+public class Doctor extends Person {
+    private String specialization;
+    private int experienceYears;
+    private double consultationFee;
+    private ArrayList availableSlots;
+    private ArrayList assignedPatientIds;
+    private boolean isOnCall;
+
+    public Doctor(String id, String firstName,
+                  String lastName, LocalDate dateOfBirth,
+                  String gender, String phoneNumber,
+                  String email, String address,
+                  String nationalId, int age, boolean activeStatus,
+                  String specialization, int experienceYears,
+                  double consultationFee, ArrayList availableSlots,
+                  ArrayList assignedPatientIds, boolean isOnCall) {
+        super(id, firstName, lastName, dateOfBirth,
+                gender, phoneNumber, email, address,
+                nationalId, age, activeStatus);
+        this.specialization = specialization;
+        this.experienceYears = experienceYears;
+        this.consultationFee = consultationFee;
+        this.availableSlots = availableSlots;
+        this.assignedPatientIds = assignedPatientIds;
+        this.isOnCall = isOnCall;
+
+    }
 }
