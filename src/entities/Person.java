@@ -133,21 +133,21 @@ public class Person {
         this.activeStatus = activeStatus;
     }
     public void displayInfo(){
-        System.out.println("Id: " + id);
-        System.out.println("FirstName: " + firstName);
-        System.out.println("Lastname: " + lastName);
-        System.out.println("Date of Birth: " + dateOfBirth);
-        System.out.println("Gender: " + gender);
-        System.out.println("Phone Number: " + phoneNumber);
-        System.out.println("Email: " + email);
-        System.out.println("Address: " + address);
-        System.out.println("National ID: " + nationalId);
-        System.out.println("Age: " + age);
-        System.out.println("Active Status: " + activeStatus);
+        IO.println("Id: " + id);
+        IO.println("FirstName: " + firstName);
+        IO.println("Lastname: " + lastName);
+        IO.println("Date of Birth: " + dateOfBirth);
+        IO.println("Gender: " + gender);
+        IO.println("Phone Number: " + phoneNumber);
+        IO.println("Email: " + email);
+        IO.println("Address: " + address);
+        IO.println("National ID: " + nationalId);
+        IO.println("Age: " + age);
+        IO.println("Active Status: " + activeStatus);
     }
     public void displaysummary(){
-        System.out.println("Id: " + id);
-        System.out.println("Full Name: " + getFullName());
+        IO.println("Id: " + id);
+        IO.println("Full Name: " + getFullName());
     }
     public String getFullName(){
         return firstName +" "+lastName;
