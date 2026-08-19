@@ -50,4 +50,19 @@ public class Doctor extends Person {
     public boolean hasSlot(String slot) {
         return availableSlots.contains(slot);
     }
+    public void assignPatient(String patientId) {
+        assignedPatientIds.add(patientId);
+    }
+
+    public int getPatientLoad() {
+        return assignedPatientIds.size();
+    }
+    public void raiseFee(double amount) {
+
+        if (amount < 0) {
+            throw new IllegalArgumentException("Amount cannot be negative");
+        }
+
+        consultationFee += amount;
+    }
 }
