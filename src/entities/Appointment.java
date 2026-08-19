@@ -60,27 +60,52 @@ public class Appointment {
     //Setter
 
     public void setAppointmentId(String appointmentId) {
+        if (appointmentId == null || appointmentId.isEmpty()) {
+            IO.println("Appointment ID cannot be empty");
+            return;
+        }
 
         this.appointmentId = appointmentId;
     }
 
     public void setPatientId(String patientId) {
+        if (patientId == null || patientId.isEmpty()) {
+            IO.println("Patient ID cannot be empty");
+            return;
+        }
+
         this.patientId = patientId;
     }
 
     public void setDoctorId(String doctorId) {
+        if (doctorId == null || doctorId.isEmpty()) {
+            IO.println("Doctor ID cannot be empty");
+            return;
+        }
+
         this.doctorId = doctorId;
     }
 
     public void setAppointmentDate(LocalDate appointmentDate) {
+        if (appointmentDate == null) {
+            IO.println("Appointment date cannot be empty");
+            return;
+        }
+
         this.appointmentDate = appointmentDate;
     }
 
-    public void setAppointmentTime(LocalTime appointmentTime) {
-        this.appointmentTime = appointmentTime;
-    }
-
     public void setStatus(String status) {
+
+        if (status == null ||
+                (!status.equals("Cancelled") &&
+                        !status.equals("Completed") &&
+                        !status.equals("Rescheduled"))) {
+
+            IO.println("Invalid appointment status");
+            return;
+        }
+
         this.status = status;
     }
 
