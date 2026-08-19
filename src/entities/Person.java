@@ -34,4 +34,11 @@ public class Person {
         setAge(age);
         setActiveStatus(activeStatus);
     }
+    // Overloaded constructor
+    public Person(String id, String firstName, String lastName) {
+        setId(id);
+        setFirstName(firstName);
+        setLastName(lastName);
+}
+
 }
