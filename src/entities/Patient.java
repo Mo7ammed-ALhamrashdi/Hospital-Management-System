@@ -33,4 +33,19 @@ public class Patient extends Person {
         this.outstandingBalance = outstandingBalance;
         this.isInsured = isInsured;
     }
+
+    @Override
+    public void displayInfo() {
+
+        super.displayInfo();
+
+        IO.println("Blood Group: " + bloodGroup);
+        IO.println("Emergency Contact: " + emergencyContact);
+        IO.println("Registration Date: " + registrationDate);
+        IO.println("Allergies: " + allergies);
+        IO.println("Medical Record IDs: " + recordIds);
+        IO.println("Outstanding Balance: " + outstandingBalance);
+        IO.println("Insured: " + isInsured);
     }
+
+}
