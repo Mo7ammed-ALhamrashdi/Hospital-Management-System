@@ -21,17 +21,19 @@ public class Patient extends Person {
                    LocalDate registrationDate,
                    double outstandingBalance, boolean isInsured) {
 
-        super(id, firstName, lastName, dateOfBirth, gender,
-                phoneNumber, email, address, nationalId,
-                age, activeStatus);
+        super(id, firstName, lastName,
+                dateOfBirth, gender,
+                phoneNumber, email, address,
+                nationalId, age, activeStatus);
 
-        this.bloodGroup = bloodGroup;
-        this.emergencyContact = emergencyContact;
-        this.registrationDate = registrationDate;
-        this.allergies = new ArrayList();
-        this.recordIds = new ArrayList();
-        this.outstandingBalance = outstandingBalance;
-        this.isInsured = isInsured;
+        setBloodGroup(bloodGroup);
+        setEmergencyContact(emergencyContact);
+        setRegistrationDate(registrationDate);
+        setOutstandingBalance(outstandingBalance);
+        setInsured(isInsured);
+
+        allergies = new ArrayList();
+        recordIds = new ArrayList();
     }
 
     @Override
@@ -46,6 +48,28 @@ public class Patient extends Person {
         IO.println("Medical Record IDs: " + recordIds);
         IO.println("Outstanding Balance: " + outstandingBalance);
         IO.println("Insured: " + isInsured);
+    }
+    public void setBloodGroup(String bloodGroup) {
+        this.bloodGroup = bloodGroup;
+    }
+    public void updateContact(String phone) {
+        setPhoneNumber(phone);
+    }
+
+    public void updateContact(String phone, String email) {
+        setPhoneNumber(phone);
+        setEmail(email);
+    }
+    public void setEmergencyContact(String emergencyContact) {
+        this.emergencyContact = emergencyContact;
+    }
+
+    public void setRegistrationDate(LocalDate registrationDate) {
+        this.registrationDate = registrationDate;
+    }
+
+    public void setInsured(boolean isInsured) {
+        this.isInsured = isInsured;
     }
 
     public void addAllergy(String allergy) {
