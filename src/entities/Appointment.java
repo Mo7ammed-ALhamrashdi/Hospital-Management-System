@@ -91,11 +91,29 @@ public class Appointment {
     public void setFollowUp(boolean followUp) {
         isFollowUp = followUp;
     }
+    public void displayInfo() {
+        IO.println("Appointment ID: " + appointmentId);
+        IO.println("Patient ID: " + patientId);
+        IO.println("Doctor ID: " + doctorId);
+        IO.println("Appointment Date: " + appointmentDate);
+        IO.println("Appointment Time: " + appointmentTime);
+        IO.println("Status: " + status);
+        IO.println("Reason: " + reason);
+        IO.println("Follow Up: " + isFollowUp);
+    }
     public void cancel() {
         status = "Cancelled";
     }
 
     public void complete() {
         status = "Completed";
+    }
+    public void reschedule(LocalDate newDate, LocalTime newTime) {
+        appointmentDate = newDate;
+        appointmentTime = newTime;
+        status = "Rescheduled";
+    }
+    public boolean isPast(LocalDate date) {
+        return appointmentDate.isBefore(date);
     }
 }
