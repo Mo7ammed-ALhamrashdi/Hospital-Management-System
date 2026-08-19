@@ -34,7 +34,7 @@ public class Person {
         setActiveStatus(activeStatus);
     }
 
-    // Overloaded constructor
+    // Overloaded
     public Person(String id, String firstName, String lastName) {
         setId(id);
         setFirstName(firstName);
@@ -88,21 +88,33 @@ public class Person {
 
     //Setter
     public void setId(String id) {
-        this.id = id;
-        if (id == null || id.trim().isEmpty()) {
-
+        if (id == null || id.isEmpty()) {
+            IO.println("ID cannot be empty");
+            return;
         }
+        this.id = id;
     }
-
     public void setFirstName(String firstName) {
+        if (firstName == null || firstName.isEmpty()) {
+            IO.println("First name cannot be empty");
+            return;
+        }
         this.firstName = firstName;
     }
 
     public void setLastName(String lastName) {
+        if (lastName == null || lastName.isEmpty()) {
+            IO.println("Last name cannot be empty");
+            return;
+        }
         this.lastName = lastName;
     }
 
     public void setDateOfBirth(LocalDate dateOfBirth) {
+        if (dateOfBirth == null) {
+            IO.println("Date of birth cannot be empty");
+            return;
+        }
         this.dateOfBirth = dateOfBirth;
     }
 
@@ -127,6 +139,10 @@ public class Person {
     }
 
     public void setAge(int age) {
+        if (age < 0 || age > 120) {
+            IO.println("Age must be between 0 and 120");
+            return;
+        }
         this.age = age;
     }
 
