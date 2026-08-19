@@ -39,6 +39,20 @@ public class Doctor extends Person {
         System.out.println("Assigned Patient IDs: " + assignedPatientIds);
         System.out.println("On Call: " + isOnCall);
     }
+    public void setExperienceYears(int experienceYears) {
+        if (experienceYears < 0) {
+            IO.println("Experience years cannot be negative");
+            return;
+        }
+        this.experienceYears = experienceYears;
+    }
+    public void setConsultationFee(double consultationFee) {
+        if (consultationFee < 0) {
+            IO.println("Fee cannot be negative");
+            return;
+        }
+        this.consultationFee = consultationFee;
+    }
     public void addSlot(String slot) {
         availableSlots.add(slot);
     }
