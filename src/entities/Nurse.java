@@ -43,5 +43,11 @@ public class Nurse extends Person {
     public void unassignPatient(String patientId) {
         assignedPatientIds.remove(patientId);
     }
+    public int getPatientLoad() {
+        return assignedPatientIds.size();
+    }
 
+    public boolean isNightShift() {
+        return shift.equals("Night");
+    }
 }
