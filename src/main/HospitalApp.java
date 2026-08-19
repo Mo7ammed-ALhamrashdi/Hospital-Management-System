@@ -297,6 +297,23 @@ public class HospitalApp {
         IO.println("Doctors: " + doctorCount);
         IO.println("Nurses: " + nurseCount);
     }
+// =====================================================
+    // Task 2.3 - findOldest
+    // =====================================================
 
+    public static Person findOldest(Person[] people) {
 
+        Person oldest = people[0];
+
+        for (Person person : people) {
+
+            if (person.getAge() > oldest.getAge()) {
+
+                oldest = person;
+            }
+        }
+
+        return oldest;
+    }
 }
+
