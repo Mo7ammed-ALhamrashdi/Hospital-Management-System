@@ -91,4 +91,11 @@ public class Appointment {
     public void setFollowUp(boolean followUp) {
         isFollowUp = followUp;
     }
+    public void cancel() {
+        status = "Cancelled";
+    }
+
+    public void complete() {
+        status = "Completed";
+    }
 }
