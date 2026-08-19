@@ -29,4 +29,14 @@ public class Doctor extends Person {
         this.isOnCall = isOnCall;
 
     }
+    @Override
+    public void displayInfo() {
+        super.displayInfo();
+        System.out.println("Specialization: " + specialization);
+        System.out.println("Experience Years: " + experienceYears);
+        System.out.println("Consultation Fee: " + consultationFee);
+        System.out.println("Available Slots: " + availableSlots);
+        System.out.println("Assigned Patient IDs: " + assignedPatientIds);
+        System.out.println("On Call: " + isOnCall);
+    }
 }
