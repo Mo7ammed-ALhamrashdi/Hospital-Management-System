@@ -69,12 +69,22 @@ public class Patient extends Person {
     public int getRecordCount() {
         return recordIds.size();
     }
-
     public void addToBalance(double amount) {
+        if (amount < 0) {
+            IO.println("Balance cannot be negative");
+            return;
+        }
         outstandingBalance += amount;
     }
-
     public void clearBalance() {
         outstandingBalance = 0;
+    }
+    public void setOutstandingBalance(double outstandingBalance) {
+        if (outstandingBalance < 0) {
+            IO.println("Balance cannot be negative");
+            return;
+        }
+
+        this.outstandingBalance = outstandingBalance;
     }
 }
