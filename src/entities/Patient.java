@@ -48,4 +48,18 @@ public class Patient extends Person {
         IO.println("Insured: " + isInsured);
     }
 
+    public void addAllergy(String allergy) {
+        allergies.add(allergy);
+    }
+
+    public boolean hasAllergy(String allergy) {
+        return allergies.contains(allergy);
+    }
+
+    public void listAllergies() {
+        for (Object allergy : allergies) {
+            IO.println(allergy);
+        }
+    }
+
 }
