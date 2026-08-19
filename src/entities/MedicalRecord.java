@@ -59,19 +59,39 @@ public class MedicalRecord {
         return isConfidential;
     }
 //Setter
-    public void setRecordId(String recordId) {
-        this.recordId = recordId;
+public void setRecordId(String recordId) {
+    if (recordId == null || recordId.isEmpty()) {
+        IO.println("Record ID cannot be empty");
+        return;
     }
 
+    this.recordId = recordId;
+}
+
     public void setPatientId(String patientId) {
+        if (patientId == null || patientId.isEmpty()) {
+            IO.println("Patient ID cannot be empty");
+            return;
+        }
+
         this.patientId = patientId;
     }
 
     public void setDoctorId(String doctorId) {
+        if (doctorId == null || doctorId.isEmpty()) {
+            IO.println("Doctor ID cannot be empty");
+            return;
+        }
+
         this.doctorId = doctorId;
     }
 
     public void setVisitDate(LocalDate visitDate) {
+        if (visitDate == null) {
+            IO.println("Visit date cannot be empty");
+            return;
+        }
+
         this.visitDate = visitDate;
     }
 
@@ -106,4 +126,5 @@ public class MedicalRecord {
     public void markConfidential() {
         isConfidential = true;
     }
+
 }
