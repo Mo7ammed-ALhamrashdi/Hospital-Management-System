@@ -34,10 +34,10 @@ public class InPatient extends Patient {
 
         super.displayInfo();
 
-        System.out.println("Admission Date: " + admissionDate);
-        System.out.println("Room Number: " + roomNumber);
-        System.out.println("Daily Charges: " + dailyCharges);
-        System.out.println("Days Admitted: " + daysAdmitted);
+        IO.println("Admission Date: " + admissionDate);
+        IO.println("Room Number: " + roomNumber);
+        IO.println("Daily Charges: " + dailyCharges);
+        IO.println("Days Admitted: " + daysAdmitted);
     }
 
     public void admit(LocalDate date) {
@@ -53,4 +53,3 @@ public class InPatient extends Patient {
         return dailyCharges * daysAdmitted;
     }
 }
-
