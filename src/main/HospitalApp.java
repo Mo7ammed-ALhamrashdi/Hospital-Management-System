@@ -65,11 +65,11 @@ public class HospitalApp {
                     break;
 
                 case 7:
-                    System.out.println("Goodbye!");
+                    IO.println("Goodbye!");
                     break;
 
                 default:
-                    System.out.println("Invalid choice.");
+                    IO.println("Invalid choice.");
             }
 
         } while (choice != 7);
@@ -81,15 +81,15 @@ public class HospitalApp {
 
     private void showMenu() {
 
-        System.out.println();
-        System.out.println("===== HOSPITAL SYSTEM =====");
-        System.out.println("1. Patients");
-        System.out.println("2. Doctors");
-        System.out.println("3. Nurses");
-        System.out.println("4. Appointments");
-        System.out.println("5. Medical Records");
-        System.out.println("6. Reports");
-        System.out.println("7. Exit");
+        IO.println();
+        IO.println("..... HOSPITAL SYSTEM .....");
+        IO.println("1. Patients");
+        IO.println("2. Doctors");
+        IO.println("3. Nurses");
+        IO.println("4. Appointments");
+        IO.println("5. Medical Records");
+        IO.println("6. Reports");
+        IO.println("7. Exit");
     }
 
     // =========================
@@ -98,16 +98,16 @@ public class HospitalApp {
 
     private void patientMenu() {
 
-        System.out.println();
-        System.out.println("===== PATIENTS =====");
-        System.out.println("1. Add Patient");
-        System.out.println("2. View All");
-        System.out.println("3. Search");
-        System.out.println("4. Update Contact");
-        System.out.println("5. Remove");
-        System.out.println("6. List InPatients");
-        System.out.println("7. Total Outstanding");
-        System.out.println("8. Back");
+        IO.println();
+        IO.println("===== PATIENTS =====");
+        IO.println("1. Add Patient");
+        IO.println("2. View All");
+        IO.println("3. Search");
+        IO.println("4. Update Contact");
+        IO.println("5. Remove");
+        IO.println("6. List InPatients");
+        IO.println("7. Total Outstanding");
+        IO.println("8. Back");
 
         int choice = readInt("Choose: ");
 
@@ -138,7 +138,7 @@ public class HospitalApp {
                 break;
 
             case 7:
-                System.out.println(
+                IO.println(
                         "Total Outstanding: "
                                 + patientService.totalOutstanding());
                 break;
@@ -147,7 +147,7 @@ public class HospitalApp {
                 break;
 
             default:
-                System.out.println("Invalid choice.");
+                IO.println("Invalid choice.");
         }
     }
 
@@ -165,7 +165,7 @@ public class HospitalApp {
                 bloodGroup
         );
 
-        System.out.println("Patient added.");
+        IO.println("Patient added.");
     }
 
     private void viewPatients() {
@@ -178,7 +178,7 @@ public class HospitalApp {
 
             patient.displayInfo();
 
-            System.out.println("-------------------");
+            IO.println("-------------------");
         }
     }
 
@@ -194,7 +194,7 @@ public class HospitalApp {
 
             patient.displayInfo();
 
-            System.out.println("-------------------");
+            IO.println("-------------------");
         }
     }
 
@@ -206,7 +206,7 @@ public class HospitalApp {
 
         patientService.updateContact(id, phone, email);
 
-        System.out.println("Contact updated.");
+        IO.println("Contact updated.");
     }
 
     private void removePatient() {
@@ -215,7 +215,7 @@ public class HospitalApp {
 
         patientService.removeById(id);
 
-        System.out.println("Patient removed.");
+        IO.println("Patient removed.");
     }
 
     private void listInPatients() {
@@ -228,7 +228,7 @@ public class HospitalApp {
 
             patient.displayInfo();
 
-            System.out.println("-------------------");
+            IO.println("-------------------");
         }
     }
 
@@ -238,17 +238,17 @@ public class HospitalApp {
 
     private void doctorMenu() {
 
-        System.out.println();
-        System.out.println("===== DOCTORS =====");
-        System.out.println("1. Add Doctor");
-        System.out.println("2. View All");
-        System.out.println("3. Search");
-        System.out.println("4. Remove");
-        System.out.println("5. Add Slot");
-        System.out.println("6. Assign Patient");
-        System.out.println("7. List By Specialization");
-        System.out.println("8. Available Doctors");
-        System.out.println("9. Back");
+        IO.println();
+        IO.println("===== DOCTORS =====");
+        IO.println("1. Add Doctor");
+        IO.println("2. View All");
+        IO.println("3. Search");
+        IO.println("4. Remove");
+        IO.println("5. Add Slot");
+        IO.println("6. Assign Patient");
+        IO.println("7. List By Specialization");
+        IO.println("8. Available Doctors");
+        IO.println("9. Back");
 
         int choice = readInt("Choose: ");
 
@@ -290,7 +290,7 @@ public class HospitalApp {
                 break;
 
             default:
-                System.out.println("Invalid choice.");
+                IO.println("Invalid choice.");
         }
     }
 
@@ -324,7 +324,7 @@ public class HospitalApp {
 
         doctorService.add(doctor);
 
-        System.out.println("Doctor added.");
+        IO.println("Doctor added.");
     }
 
     private void viewDoctors() {
@@ -337,7 +337,7 @@ public class HospitalApp {
 
             doctor.displayInfo();
 
-            System.out.println("-------------------");
+            IO.println("-------------------");
         }
     }
 
@@ -353,7 +353,7 @@ public class HospitalApp {
 
             doctor.displayInfo();
 
-            System.out.println("-------------------");
+            IO.println("-------------------");
         }
     }
 
@@ -363,7 +363,7 @@ public class HospitalApp {
 
         doctorService.removeById(id);
 
-        System.out.println("Doctor removed.");
+        IO.println("Doctor removed.");
     }
 
     private void addDoctorSlot() {
@@ -373,7 +373,7 @@ public class HospitalApp {
 
         doctorService.addSlot(id, slot);
 
-        System.out.println("Slot added.");
+        IO.println("Slot added.");
     }
 
     private void assignPatientToDoctor() {
@@ -383,7 +383,7 @@ public class HospitalApp {
 
         doctorService.assignPatient(doctorId, patientId);
 
-        System.out.println("Patient assigned.");
+        IO.println("Patient assigned.");
     }
 
     private void listDoctorsBySpecialization() {
@@ -400,7 +400,7 @@ public class HospitalApp {
 
             doctor.displayInfo();
 
-            System.out.println("-------------------");
+            IO.println("-------------------");
         }
     }
 
@@ -415,7 +415,7 @@ public class HospitalApp {
 
             doctor.displayInfo();
 
-            System.out.println("-------------------");
+            IO.println("-------------------");
         }
     }
 
@@ -425,15 +425,15 @@ public class HospitalApp {
 
     private void nurseMenu() {
 
-        System.out.println();
-        System.out.println("===== NURSES =====");
-        System.out.println("1. Add Nurse");
-        System.out.println("2. View All");
-        System.out.println("3. Search");
-        System.out.println("4. Remove");
-        System.out.println("5. List By Shift");
-        System.out.println("6. Reassign Patient");
-        System.out.println("7. Back");
+        IO.println();
+        IO.println("===== NURSES =====");
+        IO.println("1. Add Nurse");
+        IO.println("2. View All");
+        IO.println("3. Search");
+        IO.println("4. Remove");
+        IO.println("5. List By Shift");
+        IO.println("6. Reassign Patient");
+        IO.println("7. Back");
 
         int choice = readInt("Choose: ");
 
@@ -467,7 +467,7 @@ public class HospitalApp {
                 break;
 
             default:
-                System.out.println("Invalid choice.");
+                IO.println("Invalid choice.");
         }
     }
 
@@ -501,7 +501,7 @@ public class HospitalApp {
 
         nurseService.add(nurse);
 
-        System.out.println("Nurse added.");
+        IO.println("Nurse added.");
     }
 
     private void viewNurses() {
@@ -514,7 +514,7 @@ public class HospitalApp {
 
             nurse.displayInfo();
 
-            System.out.println("-------------------");
+            IO.println("-------------------");
         }
     }
 
@@ -531,7 +531,18 @@ public class HospitalApp {
 
             nurse.displayInfo();
 
-            System.out.println("-------------------");
+            IO.println("-------------------");
+        }
+        result = nurseService.search(keyword);
+
+        if (result.length == 0) {
+            IO.println("No nurse found.");
+        } else {
+            for (Object obj : result) {
+                Nurse nurse = (Nurse) obj;
+                nurse.displayInfo();
+                IO.println("-------------------");
+            }
         }
     }
 
@@ -541,7 +552,7 @@ public class HospitalApp {
 
         nurseService.removeById(id);
 
-        System.out.println("Nurse removed.");
+        IO.println("Nurse removed.");
     }
 
     private void listNursesByShift() {
@@ -557,7 +568,7 @@ public class HospitalApp {
 
             nurse.displayInfo();
 
-            System.out.println("-------------------");
+            IO.println("-------------------");
         }
     }
 
@@ -578,7 +589,7 @@ public class HospitalApp {
                 newPatientId
         );
 
-        System.out.println("Patient reassigned.");
+        IO.println("Patient reassigned.");
     }
 
     // =========================
@@ -587,17 +598,17 @@ public class HospitalApp {
 
     private void appointmentMenu() {
 
-        System.out.println();
-        System.out.println("===== APPOINTMENTS =====");
-        System.out.println("1. Schedule");
-        System.out.println("2. View All");
-        System.out.println("3. Search");
-        System.out.println("4. Cancel");
-        System.out.println("5. Complete");
-        System.out.println("6. Reschedule");
-        System.out.println("7. List By Status");
-        System.out.println("8. List By Patient");
-        System.out.println("9. Back");
+        IO.println();
+        IO.println("===== APPOINTMENTS =====");
+        IO.println("1. Schedule");
+        IO.println("2. View All");
+        IO.println("3. Search");
+        IO.println("4. Cancel");
+        IO.println("5. Complete");
+        IO.println("6. Reschedule");
+        IO.println("7. List By Status");
+        IO.println("8. List By Patient");
+        IO.println("9. Back");
 
         int choice = readInt("Choose: ");
 
@@ -639,7 +650,7 @@ public class HospitalApp {
                 break;
 
             default:
-                System.out.println("Invalid choice.");
+                IO.println("Invalid choice.");
         }
     }
 
@@ -675,7 +686,7 @@ public class HospitalApp {
 
         appointmentService.schedule(appointment);
 
-        System.out.println("Appointment scheduled.");
+        IO.println("Appointment scheduled.");
     }
 
     private void viewAppointments() {
@@ -690,7 +701,7 @@ public class HospitalApp {
 
             appointment.displayInfo();
 
-            System.out.println("-------------------");
+            IO.println("-------------------");
         }
     }
 
@@ -709,7 +720,7 @@ public class HospitalApp {
 
             appointment.displayInfo();
 
-            System.out.println("-------------------");
+            IO.println("-------------------");
         }
     }
 
@@ -720,7 +731,7 @@ public class HospitalApp {
 
         appointmentService.cancel(id);
 
-        System.out.println("Appointment cancelled.");
+        IO.println("Appointment cancelled.");
     }
 
     private void completeAppointment() {
@@ -730,7 +741,7 @@ public class HospitalApp {
 
         appointmentService.complete(id);
 
-        System.out.println("Appointment completed.");
+        IO.println("Appointment completed.");
     }
 
     private void rescheduleAppointment() {
@@ -754,7 +765,7 @@ public class HospitalApp {
                 time
         );
 
-        System.out.println("Appointment rescheduled.");
+        IO.println("Appointment rescheduled.");
     }
 
     private void listAppointmentsByStatus() {
@@ -797,15 +808,15 @@ public class HospitalApp {
 
     private void recordMenu() {
 
-        System.out.println();
-        System.out.println("===== MEDICAL RECORDS =====");
-        System.out.println("1. Add Record");
-        System.out.println("2. View All");
-        System.out.println("3. Search");
-        System.out.println("4. Remove");
-        System.out.println("5. List By Patient");
-        System.out.println("6. Count Confidential");
-        System.out.println("7. Back");
+        IO.println();
+        IO.println("===== MEDICAL RECORDS =====");
+        IO.println("1. Add Record");
+        IO.println("2. View All");
+        IO.println("3. Search");
+        IO.println("4. Remove");
+        IO.println("5. List By Patient");
+        IO.println("6. Count Confidential");
+        IO.println("7. Back");
 
         int choice =
                 readInt("Choose: ");
@@ -833,7 +844,7 @@ public class HospitalApp {
                 break;
 
             case 6:
-                System.out.println(
+                IO.println(
                         "Confidential Records: "
                                 + recordService.countConfidential()
                 );
@@ -843,7 +854,7 @@ public class HospitalApp {
                 break;
 
             default:
-                System.out.println("Invalid choice.");
+                IO.println("Invalid choice.");
         }
     }
 
@@ -881,7 +892,7 @@ public class HospitalApp {
 
         recordService.add(record);
 
-        System.out.println("Medical record added.");
+        IO.println("Medical record added.");
     }
 
     private void viewRecords() {
@@ -896,7 +907,24 @@ public class HospitalApp {
 
             record.displayInfo();
 
-            System.out.println("-------------------");
+            IO.println("-------------------");
+        }
+        String patientId = readText("Patient ID: ");
+
+        result = recordService.listByPatient(patientId);
+
+        if (result.length == 0) {
+            IO.println("No records found for this patient.");
+        } else {
+
+            for (Object obj : result) {
+
+                MedicalRecord record = (MedicalRecord) obj;
+
+                record.displayInfo();
+
+                IO.println("-------------------");
+            }
         }
     }
 
@@ -915,7 +943,7 @@ public class HospitalApp {
 
             record.displayInfo();
 
-            System.out.println("-------------------");
+            IO.println("-------------------");
         }
     }
 
@@ -926,7 +954,7 @@ public class HospitalApp {
 
         recordService.removeById(id);
 
-        System.out.println("Record removed.");
+        IO.println("Record removed.");
     }
 
     private void listRecordsByPatient() {
@@ -953,42 +981,28 @@ public class HospitalApp {
     private void reportsMenu() {
 
         System.out.println();
-        System.out.println("===== REPORTS =====");
+        System.out.println("..... REPORTS .....");
 
-        System.out.println(
-                "Total Patients: "
-                        + patientService.getAll().length
-        );
+        System.out.println("Total Patients: "
+                + patientService.getAll().length);
 
-        System.out.println(
-                "Total Doctors: "
-                        + doctorService.getAll().length
-        );
+        System.out.println("Total Doctors: "
+                + doctorService.getAll().length);
 
-        System.out.println(
-                "Total Nurses: "
-                        + nurseService.getAll().length
-        );
+        System.out.println("Total Nurses: "
+                + nurseService.getAll().length);
 
-        System.out.println(
-                "Total Appointments: "
-                        + appointmentService.getAll().length
-        );
+        System.out.println("Total Appointments: "
+                + appointmentService.getAll().length);
 
-        System.out.println(
-                "Total Medical Records: "
-                        + recordService.getAll().length
-        );
+        System.out.println("Total Medical Records: "
+                + recordService.getAll().length);
 
-        System.out.println(
-                "Outstanding Balance: "
-                        + patientService.totalOutstanding()
-        );
+        System.out.println("Total Outstanding: "
+                + patientService.totalOutstanding());
 
-        System.out.println(
-                "Confidential Records: "
-                        + recordService.countConfidential()
-        );
+        System.out.println("Confidential Records: "
+                + recordService.countConfidential());
     }
 
     // =========================
@@ -997,22 +1011,23 @@ public class HospitalApp {
 
     private String readText(String message) {
 
-        System.out.print(message);
+        IO.print(message);
 
         return scanner.nextLine();
     }
 
     private int readInt(String message) {
 
-        System.out.print(message);
+        IO.print(message);
 
         return Integer.parseInt(scanner.nextLine());
     }
 
     private double readDouble(String message) {
 
-        System.out.print(message);
+        IO.print(message);
 
         return Double.parseDouble(scanner.nextLine());
     }
+
 }
