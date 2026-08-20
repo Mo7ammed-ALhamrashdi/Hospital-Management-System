@@ -8,7 +8,39 @@ import interfaces.Searchable;
 public class DoctorService implements Manageable, Searchable {
     private Doctor[] doctors = new Doctor[100];
     private int count = 0;
+    public Object[] availableDoctors() {
+
+        Doctor[] result = new Doctor[count];
+        int resultCount = 0;
+
+        for (int i = 0; i < count; i++) {
+
+            if (doctors[i].getPatientLoad() == 0) {
+                result[resultCount] = doctors[i];
+                resultCount++;
+            }
+        }
+
+        Object[] finalResult = new Object[resultCount];
+
+        for (int i = 0; i < resultCount; i++) {
+            finalResult[i] = result[i];
+        }
+
+        return finalResult;
+    }
     //add
+    public void addSlot(String doctorId, String slot) {
+
+        Doctor doctor = (Doctor) searchById(doctorId);
+
+        if (doctor != null) {
+            doctor.addSlot(slot);
+            System.out.println("Slot added.");
+        } else {
+            System.out.println("Doctor not found.");
+        }
+    }
     public void add(Doctor doctor) {
         doctors[count] = doctor;
         count++;

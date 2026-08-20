@@ -21,7 +21,12 @@ public class AppointmentService implements Manageable, Searchable {
             count++;
         }
     }
+    // schedule - existing Appointment
+    public void schedule(Appointment appointment) {
 
+        appointments[count] = appointment;
+        count++;
+    }
     // schedule - ids + date
     public void schedule(String patientId,
                          String doctorId,
