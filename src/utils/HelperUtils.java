@@ -47,5 +47,26 @@ public class HelperUtils {
     public static boolean isInRange(double number, double min, double max) {
         return number >= min && number <= max;
     }
+    public static boolean isValidAge(int age) {
+        return age >= 0 && age <= 120;
+    }
+
+    public static boolean isValidPhone(String phone) {
+        return phone != null && phone.length() >= 8;
+    }
+
+    public static boolean isOneOf(String value, String[] allowed) {
+        if (value == null || allowed == null) {
+            return false;
+        }
+
+        for (String item : allowed) {
+            if (value.equals(item)) {
+                return true;
+            }
+        }
+
+        return false;
+    }
 }
 
