@@ -22,5 +22,30 @@ public class HelperUtils {
                 && text.length() >= minLength
                 && text.length() <= maxLength;
     }
+    private static int counter = 1;
+
+    public static String generateId() {
+        return String.valueOf(counter++);
+    }
+
+    public static String generateId(String prefix) {
+        return prefix + counter++;
+    }
+
+    public static boolean isPositive(int number) {
+        return number > 0;
+    }
+
+    public static boolean isPositive(double number) {
+        return number > 0;
+    }
+
+    public static boolean isInRange(int number, int min, int max) {
+        return number >= min && number <= max;
+    }
+
+    public static boolean isInRange(double number, double min, double max) {
+        return number >= min && number <= max;
+    }
 }
 
