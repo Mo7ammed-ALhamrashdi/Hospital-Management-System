@@ -117,6 +117,9 @@ public class Patient extends Person implements Displayable {
     public void clearBalance() {
         outstandingBalance = 0;
     }
+    public double getOutstandingBalance() {
+        return outstandingBalance;
+    }
     public void setOutstandingBalance(double outstandingBalance) {
         if (outstandingBalance < 0) {
             IO.println("Balance cannot be negative");

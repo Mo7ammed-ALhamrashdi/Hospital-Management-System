@@ -54,7 +54,13 @@ public class Doctor extends Person implements Displayable {
     public void updateFee(double fee) {
         setConsultationFee(fee);
     }
+    public String getSpecialization() {
+        return specialization;
+    }
 
+    public double getConsultationFee() {
+        return consultationFee;
+    }
     public void updateFee(double fee, String reason) {
         setConsultationFee(fee);
 
