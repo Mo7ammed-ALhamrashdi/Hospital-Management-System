@@ -100,8 +100,8 @@ public class Appointment {
     public void setStatus(String status) {
 
         if (!HelperUtils.isOneOf(status,
-                new String[]{"Scheduled", "Cancelled", "Completed"}))
-                 {
+                new String[]{"Scheduled", "Cancelled", "Completed", "Rescheduled"})) {
+
             IO.println("Invalid appointment status");
             return;
         }
@@ -138,9 +138,9 @@ public class Appointment {
         status = "Completed";
     }
     public void reschedule(LocalDate newDate, LocalTime newTime) {
-        appointmentDate = newDate;
+        setAppointmentDate(newDate);
         appointmentTime = newTime;
-        status = "Rescheduled";
+        setStatus("Rescheduled");
     }
     public boolean isPast(LocalDate date) {
         return appointmentDate.isBefore(date);

@@ -67,7 +67,9 @@ public class Nurse extends Person implements Displayable {
 
         this.yearsOfService = yearsOfService;
     }
-
+    public String getShift() {
+        return shift;
+    }
     public void setShift(String shift) {
 
         if (!HelperUtils.isOneOf(shift,
