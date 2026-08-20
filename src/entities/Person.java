@@ -1,9 +1,8 @@
 package entities;
 
 import interfaces.Displayable;
-
 import java.time.LocalDate;
-
+import utils.HelperUtils;
 public class Person implements Displayable {
     private String id;
     private String firstName;
@@ -90,14 +89,14 @@ public class Person implements Displayable {
 
     //Setter
     public void setId(String id) {
-        if (id == null || id.isEmpty()) {
+        if (HelperUtils.isEmpty(id)) {
             IO.println("ID cannot be empty");
             return;
         }
         this.id = id;
     }
     public void setFirstName(String firstName) {
-        if (firstName == null || firstName.isEmpty()) {
+        if (HelperUtils.isEmpty(firstName)) {
             IO.println("First name cannot be empty");
             return;
         }
@@ -105,7 +104,7 @@ public class Person implements Displayable {
     }
 
     public void setLastName(String lastName) {
-        if (lastName == null || lastName.isEmpty()) {
+        if (HelperUtils.isEmpty(lastName)) {
             IO.println("Last name cannot be empty");
             return;
         }
@@ -141,7 +140,7 @@ public class Person implements Displayable {
     }
 
     public void setAge(int age) {
-        if (age < 0 || age > 120) {
+        if (!HelperUtils.isValidAge(age)) {
             IO.println("Age must be between 0 and 120");
             return;
         }

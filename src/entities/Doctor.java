@@ -1,6 +1,7 @@
 package entities;
-import interfaces.Displayable;
 
+import interfaces.Displayable;
+import utils.HelperUtils;
 import java.time.LocalDate;
 import java.util.ArrayList;
 
@@ -57,14 +58,23 @@ public class Doctor extends Person implements Displayable {
     public void updateFee(double fee, String reason) {
         setConsultationFee(fee);
 
-        System.out.println("Fee updated because: " + reason);
+        IO.println("Fee updated because: " + reason);
     }
     public void setConsultationFee(double consultationFee) {
         if (consultationFee < 0) {
-            IO.println("Fee cannot be negative");
+            IO.println("Consultation fee cannot be negative");
             return;
         }
         this.consultationFee = consultationFee;
+    }
+
+    public void setSpecialization(String specialization) {
+        if (HelperUtils.isEmpty(specialization)) {
+            IO.println("Specialization cannot be empty");
+            return;
+        }
+
+        this.specialization = specialization;
     }
     public void addSlot(String slot) {
         availableSlots.add(slot);

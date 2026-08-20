@@ -1,6 +1,7 @@
 package entities;
-import interfaces.Displayable;
 
+import utils.HelperUtils;
+import interfaces.Displayable;
 import java.time.LocalDate;
 import java.util.ArrayList;
     public class Surgeon extends Doctor implements Displayable {
@@ -49,6 +50,14 @@ import java.util.ArrayList;
 
         public int getUpcomingCount() {
             return upcomingSurgeryDates.size();
+        }
+        public void setSurgeriesPerformed(int surgeriesPerformed) {
+            if (surgeriesPerformed < 0) {
+                IO.println("Surgeries performed cannot be negative");
+                return;
+            }
+
+            this.surgeriesPerformed = surgeriesPerformed;
         }
     }
 

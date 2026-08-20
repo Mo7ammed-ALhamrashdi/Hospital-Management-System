@@ -1,7 +1,7 @@
 package entities;
 
 import java.time.LocalDate;
-
+import utils.HelperUtils;
 public class MedicalRecord {
 
     private String recordId;
@@ -60,7 +60,7 @@ public class MedicalRecord {
     }
 //Setter
 public void setRecordId(String recordId) {
-    if (recordId == null || recordId.isEmpty()) {
+    if (HelperUtils.isEmpty(recordId)) {
         IO.println("Record ID cannot be empty");
         return;
     }
@@ -69,7 +69,7 @@ public void setRecordId(String recordId) {
 }
 
     public void setPatientId(String patientId) {
-        if (patientId == null || patientId.isEmpty()) {
+        if (HelperUtils.isEmpty(patientId)) {
             IO.println("Patient ID cannot be empty");
             return;
         }
@@ -78,7 +78,7 @@ public void setRecordId(String recordId) {
     }
 
     public void setDoctorId(String doctorId) {
-        if (doctorId == null || doctorId.isEmpty()) {
+        if (HelperUtils.isEmpty(doctorId)) {
             IO.println("Doctor ID cannot be empty");
             return;
         }
@@ -96,14 +96,26 @@ public void setRecordId(String recordId) {
     }
 
     public void setDiagnosis(String diagnosis) {
+        if (HelperUtils.isEmpty(diagnosis)) {
+            IO.println("Diagnosis cannot be empty");
+            return;
+        }
         this.diagnosis = diagnosis;
     }
 
     public void setPrescription(String prescription) {
+        if (HelperUtils.isEmpty(prescription)) {
+            IO.println("Prescription cannot be empty");
+            return;
+        }
         this.prescription = prescription;
     }
 
     public void setNotes(String notes) {
+        if (HelperUtils.isEmpty(notes)) {
+            IO.println("Notes cannot be empty");
+            return;
+        }
         this.notes = notes;
     }
 

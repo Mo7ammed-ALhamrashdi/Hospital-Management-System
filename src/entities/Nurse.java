@@ -1,7 +1,7 @@
 package entities;
 
 import interfaces.Displayable;
-
+import utils.HelperUtils;
 import java.time.LocalDate;
 import java.util.ArrayList;
 
@@ -51,6 +51,14 @@ public class Nurse extends Person implements Displayable {
         return assignedPatientIds.size();
     }
 
+    public void setDepartmentId(String departmentId) {
+        if (HelperUtils.isEmpty(departmentId)) {
+            IO.println("Department ID cannot be empty");
+            return;
+        }
+
+        this.departmentId = departmentId;
+    }
     public void setYearsOfService(int yearsOfService) {
         if (yearsOfService < 0) {
             IO.println("Years of service cannot be negative");
@@ -62,15 +70,11 @@ public class Nurse extends Person implements Displayable {
 
     public void setShift(String shift) {
 
-        if (shift == null ||
-                (!shift.equals("Morning") &&
-                        !shift.equals("Evening") &&
-                        !shift.equals("Night"))) {
-
-            IO.println("Shift must be Morning, Evening, or Night");
+        if (!HelperUtils.isOneOf(shift,
+                new String[]{"Morning", "Evening", "Night"})) {
+            IO.println("Invalid shift");
             return;
         }
-
         this.shift = shift;
     }
 

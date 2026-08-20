@@ -1,4 +1,6 @@
 package entities;
+
+import utils.HelperUtils;
 import java.time.LocalDate;
 import java.time.LocalTime;
 public class Appointment {
@@ -60,7 +62,7 @@ public class Appointment {
     //Setter
 
     public void setAppointmentId(String appointmentId) {
-        if (appointmentId == null || appointmentId.isEmpty()) {
+        if (HelperUtils.isEmpty(appointmentId)) {
             IO.println("Appointment ID cannot be empty");
             return;
         }
@@ -69,7 +71,7 @@ public class Appointment {
     }
 
     public void setPatientId(String patientId) {
-        if (patientId == null || patientId.isEmpty()) {
+        if (HelperUtils.isEmpty(patientId)) {
             IO.println("Patient ID cannot be empty");
             return;
         }
@@ -78,7 +80,7 @@ public class Appointment {
     }
 
     public void setDoctorId(String doctorId) {
-        if (doctorId == null || doctorId.isEmpty()) {
+        if (HelperUtils.isEmpty(doctorId)) {
             IO.println("Doctor ID cannot be empty");
             return;
         }
@@ -97,11 +99,9 @@ public class Appointment {
 
     public void setStatus(String status) {
 
-        if (status == null ||
-                (!status.equals("Cancelled") &&
-                        !status.equals("Completed") &&
-                        !status.equals("Rescheduled"))) {
-
+        if (!HelperUtils.isOneOf(status,
+                new String[]{"Scheduled", "Cancelled", "Completed"}))
+                 {
             IO.println("Invalid appointment status");
             return;
         }
@@ -110,6 +110,10 @@ public class Appointment {
     }
 
     public void setReason(String reason) {
+        if (HelperUtils.isEmpty(reason)) {
+            IO.println("Reason cannot be empty");
+            return;
+        }
         this.reason = reason;
     }
 

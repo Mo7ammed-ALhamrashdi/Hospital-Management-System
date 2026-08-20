@@ -1,7 +1,7 @@
 package entities;
 
 import interfaces.Displayable;
-
+import utils.HelperUtils;
 import java.time.LocalDate;
 import java.util.ArrayList;
 
@@ -51,7 +51,12 @@ public class Patient extends Person implements Displayable {
         IO.println("Outstanding Balance: " + outstandingBalance);
         IO.println("Insured: " + isInsured);
     }
+
     public void setBloodGroup(String bloodGroup) {
+        if (HelperUtils.isEmpty(bloodGroup)) {
+            IO.println("Blood group cannot be empty");
+            return;
+        }
         this.bloodGroup = bloodGroup;
     }
     public void updateContact(String phone) {
@@ -63,13 +68,20 @@ public class Patient extends Person implements Displayable {
         setEmail(email);
     }
     public void setEmergencyContact(String emergencyContact) {
+        if (HelperUtils.isEmpty(emergencyContact)) {
+            IO.println("Emergency contact cannot be empty");
+            return;
+        }
         this.emergencyContact = emergencyContact;
     }
 
     public void setRegistrationDate(LocalDate registrationDate) {
+        if (registrationDate == null) {
+            IO.println("Registration date cannot be empty");
+            return;
+        }
         this.registrationDate = registrationDate;
     }
-
     public void setInsured(boolean isInsured) {
         this.isInsured = isInsured;
     }
@@ -113,4 +125,6 @@ public class Patient extends Person implements Displayable {
 
         this.outstandingBalance = outstandingBalance;
     }
+
+
 }

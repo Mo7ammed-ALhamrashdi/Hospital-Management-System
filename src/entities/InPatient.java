@@ -3,7 +3,7 @@ package entities;
 import interfaces.Displayable;
 
 import java.time.LocalDate;
-
+import utils.HelperUtils;
 public class InPatient extends Patient implements Displayable {
     private LocalDate admissionDate;
     private String roomNumber;
@@ -53,5 +53,31 @@ public class InPatient extends Patient implements Displayable {
 
     public double totalRoomCost() {
         return dailyCharges * daysAdmitted;
+    }
+    public void setRoomNumber(String roomNumber) {
+        if (HelperUtils.isEmpty(roomNumber)) {
+            IO.println("Room number cannot be empty");
+            return;
+        }
+
+        this.roomNumber = roomNumber;
+    }
+
+    public void setDailyCharges(double dailyCharges) {
+        if (dailyCharges < 0) {
+            IO.println("Daily charges cannot be negative");
+            return;
+        }
+
+        this.dailyCharges = dailyCharges;
+    }
+
+    public void setDaysAdmitted(int daysAdmitted) {
+        if (daysAdmitted < 0) {
+            IO.println("Days admitted cannot be negative");
+            return;
+        }
+
+        this.daysAdmitted = daysAdmitted;
     }
 }
