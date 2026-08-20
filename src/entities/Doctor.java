@@ -1,8 +1,10 @@
 package entities;
+import interfaces.Displayable;
+
 import java.time.LocalDate;
 import java.util.ArrayList;
 
-public class Doctor extends Person {
+public class Doctor extends Person implements Displayable {
     private String specialization;
     private int experienceYears;
     private double consultationFee;

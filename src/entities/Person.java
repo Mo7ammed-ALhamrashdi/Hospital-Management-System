@@ -1,8 +1,10 @@
 package entities;
 
+import interfaces.Displayable;
+
 import java.time.LocalDate;
 
-public class Person {
+public class Person implements Displayable {
     private String id;
     private String firstName;
     private String lastName;
@@ -150,9 +152,11 @@ public class Person {
         this.activeStatus = activeStatus;
     }
 
+    @Override
     public void displayInfo() {
         IO.println("ID: " + id);
-        IO.println("Name: " + getFullName());
+        IO.println("First Name: " + firstName);
+        IO.println("Last Name: " + lastName);
         IO.println("Date of Birth: " + dateOfBirth);
         IO.println("Gender: " + gender);
         IO.println("Phone: " + phoneNumber);
@@ -160,13 +164,20 @@ public class Person {
         IO.println("Address: " + address);
         IO.println("National ID: " + nationalId);
         IO.println("Age: " + age);
-        IO.println("Active: " + activeStatus);
+        IO.println("Active Status: " + activeStatus);
     }
 
-    public void displaysummary() {
-        IO.println("Id: " + id);
-        IO.println("Full Name: " + getFullName());
+    @Override
+    public void displaySummry() {
+
     }
+
+    @Override
+    public void displaySummary() {
+        IO.println("ID: " + id);
+        IO.println("Name: " + getFullName());
+    }
+
 
     public String getFullName() {
         return firstName + " " + lastName;
@@ -208,7 +219,9 @@ public class Person {
     public boolean isAdult() {
         return age >= 18;
     }
+    
 }
+
 
 
 

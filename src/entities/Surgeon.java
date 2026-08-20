@@ -1,7 +1,9 @@
 package entities;
+import interfaces.Displayable;
+
 import java.time.LocalDate;
 import java.util.ArrayList;
-    public class Surgeon extends Doctor {
+    public class Surgeon extends Doctor implements Displayable {
 
         private int surgeriesPerformed;
         private boolean operationTheatreAccess;

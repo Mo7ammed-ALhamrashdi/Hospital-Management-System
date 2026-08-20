@@ -1,9 +1,11 @@
 package entities;
 
+import interfaces.Displayable;
+
 import java.time.LocalDate;
 import java.util.ArrayList;
 
-public class Patient extends Person {
+public class Patient extends Person implements Displayable {
 
     private String bloodGroup;
     private String emergencyContact;

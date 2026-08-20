@@ -1,9 +1,11 @@
 package entities;
 
+import interfaces.Displayable;
+
 import java.time.LocalDate;
 import java.util.ArrayList;
 
-public class Nurse extends Person {
+public class Nurse extends Person implements Displayable {
 
     private String departmentId;
     private String shift;

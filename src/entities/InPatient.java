@@ -1,8 +1,10 @@
 package entities;
 
+import interfaces.Displayable;
+
 import java.time.LocalDate;
 
-public class InPatient extends Patient {
+public class InPatient extends Patient implements Displayable {
     private LocalDate admissionDate;
     private String roomNumber;
     private double dailyCharges;
