@@ -1,319 +1,1018 @@
 package main;
 
 import entities.*;
-
+import services.*;
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.util.Scanner;
+
 
 public class HospitalApp {
 
+    private Scanner scanner = new Scanner(System.in);
+
+    private PatientService patientService = new PatientService();
+    private DoctorService doctorService = new DoctorService();
+    private NurseService nurseService = new NurseService();
+    private AppointmentService appointmentService = new AppointmentService();
+    private RecordService recordService = new RecordService();
+
     public static void main(String[] args) {
 
-        // =========================
-        // 1. Person
-        // =========================
+        HospitalApp app = new HospitalApp();
 
-        Person person = new Person(
-                "P001",
-                "Ahmed",
-                "Ali",
-                LocalDate.of(2000, 5, 10),
-                "Male",
-                "99112233",
-                "ahmed@email.com",
-                "Muscat",
-                "N001",
-                26,
-                true
+        app.start();
+    }
+
+    // =========================
+    // MAIN MENU
+    // =========================
+
+    public void start() {
+
+        int choice;
+
+        do {
+
+            showMenu();
+
+            choice = readInt("Choose: ");
+
+            switch (choice) {
+
+                case 1:
+                    patientMenu();
+                    break;
+
+                case 2:
+                    doctorMenu();
+                    break;
+
+                case 3:
+                    nurseMenu();
+                    break;
+
+                case 4:
+                    appointmentMenu();
+                    break;
+
+                case 5:
+                    recordMenu();
+                    break;
+
+                case 6:
+                    reportsMenu();
+                    break;
+
+                case 7:
+                    System.out.println("Goodbye!");
+                    break;
+
+                default:
+                    System.out.println("Invalid choice.");
+            }
+
+        } while (choice != 7);
+    }
+
+    // =========================
+    // MENU
+    // =========================
+
+    private void showMenu() {
+
+        System.out.println();
+        System.out.println("===== HOSPITAL SYSTEM =====");
+        System.out.println("1. Patients");
+        System.out.println("2. Doctors");
+        System.out.println("3. Nurses");
+        System.out.println("4. Appointments");
+        System.out.println("5. Medical Records");
+        System.out.println("6. Reports");
+        System.out.println("7. Exit");
+    }
+
+    // =========================
+    // PATIENT MENU
+    // =========================
+
+    private void patientMenu() {
+
+        System.out.println();
+        System.out.println("===== PATIENTS =====");
+        System.out.println("1. Add Patient");
+        System.out.println("2. View All");
+        System.out.println("3. Search");
+        System.out.println("4. Update Contact");
+        System.out.println("5. Remove");
+        System.out.println("6. List InPatients");
+        System.out.println("7. Total Outstanding");
+        System.out.println("8. Back");
+
+        int choice = readInt("Choose: ");
+
+        switch (choice) {
+
+            case 1:
+                addPatient();
+                break;
+
+            case 2:
+                viewPatients();
+                break;
+
+            case 3:
+                searchPatients();
+                break;
+
+            case 4:
+                updatePatientContact();
+                break;
+
+            case 5:
+                removePatient();
+                break;
+
+            case 6:
+                listInPatients();
+                break;
+
+            case 7:
+                System.out.println(
+                        "Total Outstanding: "
+                                + patientService.totalOutstanding());
+                break;
+
+            case 8:
+                break;
+
+            default:
+                System.out.println("Invalid choice.");
+        }
+    }
+
+    private void addPatient() {
+
+        String id = readText("ID: ");
+        String firstName = readText("First Name: ");
+        String lastName = readText("Last Name: ");
+        String bloodGroup = readText("Blood Group: ");
+
+        patientService.addPatient(
+                id,
+                firstName,
+                lastName,
+                bloodGroup
         );
 
+        System.out.println("Patient added.");
+    }
 
-        // =========================
-        // 2. Patient
-        // =========================
+    private void viewPatients() {
 
-        Patient patient = new Patient(
-                "P002",
-                "Salim",
-                "Said",
-                LocalDate.of(1998, 3, 15),
-                "Male",
-                "99223344",
-                "salim@email.com",
-                "Muscat",
-                "N002",
-                28,
-                true,
-                "O+",
-                "99334455",
-                LocalDate.of(2026, 8, 1),
-                100.0,
-                true
-        );
+        Object[] patients = patientService.getAll();
 
-        patient.addAllergy("Penicillin");
-        patient.addAllergy("Dust");
-        patient.addRecordId("R001");
-        patient.addRecordId("R002");
+        for (Object obj : patients) {
 
+            Patient patient = (Patient) obj;
 
-        // =========================
-        // 3. Doctor
-        // =========================
+            patient.displayInfo();
+
+            System.out.println("-------------------");
+        }
+    }
+
+    private void searchPatients() {
+
+        String keyword = readText("Search: ");
+
+        Object[] result = patientService.search(keyword);
+
+        for (Object obj : result) {
+
+            Patient patient = (Patient) obj;
+
+            patient.displayInfo();
+
+            System.out.println("-------------------");
+        }
+    }
+
+    private void updatePatientContact() {
+
+        String id = readText("Patient ID: ");
+        String phone = readText("New Phone: ");
+        String email = readText("New Email: ");
+
+        patientService.updateContact(id, phone, email);
+
+        System.out.println("Contact updated.");
+    }
+
+    private void removePatient() {
+
+        String id = readText("Patient ID: ");
+
+        patientService.removeById(id);
+
+        System.out.println("Patient removed.");
+    }
+
+    private void listInPatients() {
+
+        Object[] result = patientService.listInPatients();
+
+        for (Object obj : result) {
+
+            Patient patient = (Patient) obj;
+
+            patient.displayInfo();
+
+            System.out.println("-------------------");
+        }
+    }
+
+    // =========================
+    // DOCTOR MENU
+    // =========================
+
+    private void doctorMenu() {
+
+        System.out.println();
+        System.out.println("===== DOCTORS =====");
+        System.out.println("1. Add Doctor");
+        System.out.println("2. View All");
+        System.out.println("3. Search");
+        System.out.println("4. Remove");
+        System.out.println("5. Add Slot");
+        System.out.println("6. Assign Patient");
+        System.out.println("7. List By Specialization");
+        System.out.println("8. Available Doctors");
+        System.out.println("9. Back");
+
+        int choice = readInt("Choose: ");
+
+        switch (choice) {
+
+            case 1:
+                addDoctor();
+                break;
+
+            case 2:
+                viewDoctors();
+                break;
+
+            case 3:
+                searchDoctors();
+                break;
+
+            case 4:
+                removeDoctor();
+                break;
+
+            case 5:
+                addDoctorSlot();
+                break;
+
+            case 6:
+                assignPatientToDoctor();
+                break;
+
+            case 7:
+                listDoctorsBySpecialization();
+                break;
+
+            case 8:
+                availableDoctors();
+                break;
+
+            case 9:
+                break;
+
+            default:
+                System.out.println("Invalid choice.");
+        }
+    }
+
+    private void addDoctor() {
+
+        String id = readText("ID: ");
+        String firstName = readText("First Name: ");
+        String lastName = readText("Last Name: ");
+        String specialization = readText("Specialization: ");
+
+        int experience = readInt("Experience Years: ");
+        double fee = readDouble("Consultation Fee: ");
 
         Doctor doctor = new Doctor(
-                "D001",
-                "Mohammed",
-                "Said",
-                LocalDate.of(1980, 3, 20),
-                "Male",
-                "99887766",
-                "doctor@email.com",
-                "Muscat",
-                "N003",
-                46,
+                id,
+                firstName,
+                lastName,
+                LocalDate.now(),
+                "Unknown",
+                "Unknown",
+                "Unknown",
+                "Unknown",
+                id,
+                0,
                 true,
-                "Cardiology",
-                15,
-                100.0,
-                true
+                specialization,
+                experience,
+                fee,
+                false
         );
 
-        doctor.addSlot("09:00");
-        doctor.addSlot("10:00");
-        doctor.assignPatient("P002");
+        doctorService.add(doctor);
 
+        System.out.println("Doctor added.");
+    }
 
-        // =========================
-        // 4. Nurse
-        // =========================
+    private void viewDoctors() {
+
+        Object[] doctors = doctorService.getAll();
+
+        for (Object obj : doctors) {
+
+            Doctor doctor = (Doctor) obj;
+
+            doctor.displayInfo();
+
+            System.out.println("-------------------");
+        }
+    }
+
+    private void searchDoctors() {
+
+        String keyword = readText("Search: ");
+
+        Object[] result = doctorService.search(keyword);
+
+        for (Object obj : result) {
+
+            Doctor doctor = (Doctor) obj;
+
+            doctor.displayInfo();
+
+            System.out.println("-------------------");
+        }
+    }
+
+    private void removeDoctor() {
+
+        String id = readText("Doctor ID: ");
+
+        doctorService.removeById(id);
+
+        System.out.println("Doctor removed.");
+    }
+
+    private void addDoctorSlot() {
+
+        String id = readText("Doctor ID: ");
+        String slot = readText("Slot: ");
+
+        doctorService.addSlot(id, slot);
+
+        System.out.println("Slot added.");
+    }
+
+    private void assignPatientToDoctor() {
+
+        String doctorId = readText("Doctor ID: ");
+        String patientId = readText("Patient ID: ");
+
+        doctorService.assignPatient(doctorId, patientId);
+
+        System.out.println("Patient assigned.");
+    }
+
+    private void listDoctorsBySpecialization() {
+
+        String specialization =
+                readText("Specialization: ");
+
+        Object[] result =
+                doctorService.listBySpecialization(specialization);
+
+        for (Object obj : result) {
+
+            Doctor doctor = (Doctor) obj;
+
+            doctor.displayInfo();
+
+            System.out.println("-------------------");
+        }
+    }
+
+    private void availableDoctors() {
+
+        Object[] result =
+                doctorService.availableDoctors();
+
+        for (Object obj : result) {
+
+            Doctor doctor = (Doctor) obj;
+
+            doctor.displayInfo();
+
+            System.out.println("-------------------");
+        }
+    }
+
+    // =========================
+    // NURSE MENU
+    // =========================
+
+    private void nurseMenu() {
+
+        System.out.println();
+        System.out.println("===== NURSES =====");
+        System.out.println("1. Add Nurse");
+        System.out.println("2. View All");
+        System.out.println("3. Search");
+        System.out.println("4. Remove");
+        System.out.println("5. List By Shift");
+        System.out.println("6. Reassign Patient");
+        System.out.println("7. Back");
+
+        int choice = readInt("Choose: ");
+
+        switch (choice) {
+
+            case 1:
+                addNurse();
+                break;
+
+            case 2:
+                viewNurses();
+                break;
+
+            case 3:
+                searchNurses();
+                break;
+
+            case 4:
+                removeNurse();
+                break;
+
+            case 5:
+                listNursesByShift();
+                break;
+
+            case 6:
+                reassignNursePatient();
+                break;
+
+            case 7:
+                break;
+
+            default:
+                System.out.println("Invalid choice.");
+        }
+    }
+
+    private void addNurse() {
+
+        String id = readText("ID: ");
+        String firstName = readText("First Name: ");
+        String lastName = readText("Last Name: ");
+        String departmentId = readText("Department ID: ");
+        String shift = readText("Shift: ");
+
+        int years =
+                readInt("Years Of Service: ");
 
         Nurse nurse = new Nurse(
-                "N001",
-                "Fatima",
-                "Ahmed",
-                LocalDate.of(1990, 7, 10),
-                "Female",
-                "99776655",
-                "nurse@email.com",
-                "Muscat",
-                "N004",
-                36,
+                id,
+                firstName,
+                lastName,
+                LocalDate.now(),
+                "Unknown",
+                "Unknown",
+                "Unknown",
+                "Unknown",
+                id,
+                0,
                 true,
-                "DEP01",
-                "Night",
-                8
+                departmentId,
+                shift,
+                years
         );
 
-        nurse.assignPatient("P002");
+        nurseService.add(nurse);
 
-
-        // =========================
-        // 5. Medical Record
-        // =========================
-
-        MedicalRecord record = new MedicalRecord(
-                "R001",
-                "P002",
-                "D001",
-                LocalDate.of(2026, 8, 18),
-                "Flu",
-                "Medicine",
-                "Patient needs rest",
-                false
-        );
-
-        record.appendNote("Follow-up required.");
-        record.markConfidential();
-
-
-        // =========================
-        // 6. Appointment
-        // =========================
-
-        Appointment appointment = new Appointment(
-                "A001",
-                "P002",
-                "D001",
-                LocalDate.of(2026, 8, 25),
-                LocalTime.of(10, 0),
-                "Scheduled",
-                "Regular checkup",
-                false
-        );
-
-
-        // =========================
-        // 7. InPatient
-        // =========================
-
-        InPatient inPatient = new InPatient(
-                "P003",
-                "Khalid",
-                "Hassan",
-                LocalDate.of(1995, 2, 10),
-                "Male",
-                "99554433",
-                "khalid@email.com",
-                "Muscat",
-                "N005",
-                31,
-                true,
-                "A+",
-                "99443322",
-                LocalDate.of(2026, 8, 10),
-                100.0,
-                true,
-                LocalDate.of(2026, 8, 15),
-                "Room 101",
-                50.0,
-                5
-        );
-
-
-        // =========================
-        // 8. Surgeon
-        // =========================
-
-        Surgeon surgeon = new Surgeon(
-                "S001",
-                "Ali",
-                "Hamad",
-                LocalDate.of(1978, 4, 20),
-                "Male",
-                "99332211",
-                "surgeon@email.com",
-                "Muscat",
-                "N006",
-                48,
-                true,
-                "General Surgery",
-                20,
-                200.0,
-                true,
-                30,
-                true
-        );
-
-        surgeon.performSurgery();
-        surgeon.scheduleSurgery(LocalDate.of(2026, 8, 28));
-        surgeon.scheduleSurgery(LocalDate.of(2026, 9, 5));
-
-
-        // =====================================================
-        // POLYMORPHISM - Task 2.3
-        // =====================================================
-
-        Person[] people = new Person[6];
-
-        people[0] = person;
-        people[1] = patient;
-        people[2] = doctor;
-        people[3] = nurse;
-        people[4] = inPatient;
-        people[5] = surgeon;
-
-
-        // =========================
-        // Print All
-        // =========================
-
-        IO.println();
-        IO.println("===== ALL PEOPLE =====");
-
-        printAll(people);
-
-
-        // =========================
-        // Count By Type
-        // =========================
-
-        IO.println();
-        IO.println("===== COUNT BY TYPE =====");
-
-        countByType(people);
-
-
-        // =========================
-        // Find Oldest
-        // =========================
-
-        IO.println();
-        IO.println("===== OLDEST PERSON =====");
-
-        Person oldest = findOldest(people);
-
-        IO.println("Oldest Person: " + oldest.getFullName());
-        IO.println("Age: " + oldest.getAge());
+        System.out.println("Nurse added.");
     }
 
+    private void viewNurses() {
 
-    // =====================================================
-    // Task 2.3 - printAll
-    // =====================================================
+        Object[] nurses = nurseService.getAll();
 
-    public static void printAll(Person[] people) {
+        for (Object obj : nurses) {
 
-        for (Person person : people) {
+            Nurse nurse = (Nurse) obj;
 
-            person.displayInfo();
+            nurse.displayInfo();
 
-            IO.println("--------------------");
+            System.out.println("-------------------");
         }
     }
 
+    private void searchNurses() {
 
-    // =====================================================
-    // Task 2.3 - countByType
-    // =====================================================
+        String keyword = readText("Search: ");
 
-    public static void countByType(Person[] people) {
+        Object[] result =
+                nurseService.search(keyword);
 
-        int patientCount = 0;
-        int doctorCount = 0;
-        int nurseCount = 0;
+        for (Object obj : result) {
 
-        for (Person person : people) {
+            Nurse nurse = (Nurse) obj;
 
-            if (person instanceof InPatient) {
+            nurse.displayInfo();
 
-                patientCount++;
-
-            } else if (person instanceof Patient) {
-
-                patientCount++;
-
-            } else if (person instanceof Doctor) {
-
-                doctorCount++;
-
-            } else if (person instanceof Nurse) {
-
-                nurseCount++;
-            }
+            System.out.println("-------------------");
         }
-
-        IO.println("Patients: " + patientCount);
-        IO.println("Doctors: " + doctorCount);
-        IO.println("Nurses: " + nurseCount);
     }
-// =====================================================
-    // Task 2.3 - findOldest
-    // =====================================================
 
-    public static Person findOldest(Person[] people) {
+    private void removeNurse() {
 
-        Person oldest = people[0];
+        String id = readText("Nurse ID: ");
 
-        for (Person person : people) {
+        nurseService.removeById(id);
 
-            if (person.getAge() > oldest.getAge()) {
+        System.out.println("Nurse removed.");
+    }
 
-                oldest = person;
-            }
+    private void listNursesByShift() {
+
+        String shift = readText("Shift: ");
+
+        Object[] result =
+                nurseService.listByShift(shift);
+
+        for (Object obj : result) {
+
+            Nurse nurse = (Nurse) obj;
+
+            nurse.displayInfo();
+
+            System.out.println("-------------------");
         }
+    }
 
-        return oldest;
+    private void reassignNursePatient() {
+
+        String nurseId =
+                readText("Nurse ID: ");
+
+        String oldPatientId =
+                readText("Old Patient ID: ");
+
+        String newPatientId =
+                readText("New Patient ID: ");
+
+        nurseService.reassign(
+                nurseId,
+                oldPatientId,
+                newPatientId
+        );
+
+        System.out.println("Patient reassigned.");
+    }
+
+    // =========================
+    // APPOINTMENT MENU
+    // =========================
+
+    private void appointmentMenu() {
+
+        System.out.println();
+        System.out.println("===== APPOINTMENTS =====");
+        System.out.println("1. Schedule");
+        System.out.println("2. View All");
+        System.out.println("3. Search");
+        System.out.println("4. Cancel");
+        System.out.println("5. Complete");
+        System.out.println("6. Reschedule");
+        System.out.println("7. List By Status");
+        System.out.println("8. List By Patient");
+        System.out.println("9. Back");
+
+        int choice = readInt("Choose: ");
+
+        switch (choice) {
+
+            case 1:
+                scheduleAppointment();
+                break;
+
+            case 2:
+                viewAppointments();
+                break;
+
+            case 3:
+                searchAppointments();
+                break;
+
+            case 4:
+                cancelAppointment();
+                break;
+
+            case 5:
+                completeAppointment();
+                break;
+
+            case 6:
+                rescheduleAppointment();
+                break;
+
+            case 7:
+                listAppointmentsByStatus();
+                break;
+
+            case 8:
+                listAppointmentsByPatient();
+                break;
+
+            case 9:
+                break;
+
+            default:
+                System.out.println("Invalid choice.");
+        }
+    }
+
+    private void scheduleAppointment() {
+
+        String patientId =
+                readText("Patient ID: ");
+
+        String doctorId =
+                readText("Doctor ID: ");
+
+        LocalDate date =
+                LocalDate.parse(
+                        readText("Date YYYY-MM-DD: ")
+                );
+
+        LocalTime time =
+                LocalTime.parse(
+                        readText("Time HH:MM: ")
+                );
+
+        Appointment appointment =
+                new Appointment(
+                        "A" + System.currentTimeMillis(),
+                        patientId,
+                        doctorId,
+                        date,
+                        time,
+                        "Scheduled",
+                        "General",
+                        false
+                );
+
+        appointmentService.schedule(appointment);
+
+        System.out.println("Appointment scheduled.");
+    }
+
+    private void viewAppointments() {
+
+        Object[] result =
+                appointmentService.getAll();
+
+        for (Object obj : result) {
+
+            Appointment appointment =
+                    (Appointment) obj;
+
+            appointment.displayInfo();
+
+            System.out.println("-------------------");
+        }
+    }
+
+    private void searchAppointments() {
+
+        String keyword =
+                readText("Search: ");
+
+        Object[] result =
+                appointmentService.search(keyword);
+
+        for (Object obj : result) {
+
+            Appointment appointment =
+                    (Appointment) obj;
+
+            appointment.displayInfo();
+
+            System.out.println("-------------------");
+        }
+    }
+
+    private void cancelAppointment() {
+
+        String id =
+                readText("Appointment ID: ");
+
+        appointmentService.cancel(id);
+
+        System.out.println("Appointment cancelled.");
+    }
+
+    private void completeAppointment() {
+
+        String id =
+                readText("Appointment ID: ");
+
+        appointmentService.complete(id);
+
+        System.out.println("Appointment completed.");
+    }
+
+    private void rescheduleAppointment() {
+
+        String id =
+                readText("Appointment ID: ");
+
+        LocalDate date =
+                LocalDate.parse(
+                        readText("New Date YYYY-MM-DD: ")
+                );
+
+        LocalTime time =
+                LocalTime.parse(
+                        readText("New Time HH:MM: ")
+                );
+
+        appointmentService.reschedule(
+                id,
+                date,
+                time
+        );
+
+        System.out.println("Appointment rescheduled.");
+    }
+
+    private void listAppointmentsByStatus() {
+
+        String status =
+                readText("Status: ");
+
+        Object[] result =
+                appointmentService.listByStatus(status);
+
+        for (Object obj : result) {
+
+            Appointment appointment =
+                    (Appointment) obj;
+
+            appointment.displayInfo();
+        }
+    }
+
+    private void listAppointmentsByPatient() {
+
+        String patientId =
+                readText("Patient ID: ");
+
+        Object[] result =
+                appointmentService.listByPatient(patientId);
+
+        for (Object obj : result) {
+
+            Appointment appointment =
+                    (Appointment) obj;
+
+            appointment.displayInfo();
+        }
+    }
+
+    // =========================
+    // MEDICAL RECORD MENU
+    // =========================
+
+    private void recordMenu() {
+
+        System.out.println();
+        System.out.println("===== MEDICAL RECORDS =====");
+        System.out.println("1. Add Record");
+        System.out.println("2. View All");
+        System.out.println("3. Search");
+        System.out.println("4. Remove");
+        System.out.println("5. List By Patient");
+        System.out.println("6. Count Confidential");
+        System.out.println("7. Back");
+
+        int choice =
+                readInt("Choose: ");
+
+        switch (choice) {
+
+            case 1:
+                addRecord();
+                break;
+
+            case 2:
+                viewRecords();
+                break;
+
+            case 3:
+                searchRecords();
+                break;
+
+            case 4:
+                removeRecord();
+                break;
+
+            case 5:
+                listRecordsByPatient();
+                break;
+
+            case 6:
+                System.out.println(
+                        "Confidential Records: "
+                                + recordService.countConfidential()
+                );
+                break;
+
+            case 7:
+                break;
+
+            default:
+                System.out.println("Invalid choice.");
+        }
+    }
+
+    private void addRecord() {
+
+        String recordId =
+                readText("Record ID: ");
+
+        String patientId =
+                readText("Patient ID: ");
+
+        String doctorId =
+                readText("Doctor ID: ");
+
+        String diagnosis =
+                readText("Diagnosis: ");
+
+        String prescription =
+                readText("Prescription: ");
+
+        String notes =
+                readText("Notes: ");
+
+        MedicalRecord record =
+                new MedicalRecord(
+                        recordId,
+                        patientId,
+                        doctorId,
+                        LocalDate.now(),
+                        diagnosis,
+                        prescription,
+                        notes,
+                        false
+                );
+
+        recordService.add(record);
+
+        System.out.println("Medical record added.");
+    }
+
+    private void viewRecords() {
+
+        Object[] result =
+                recordService.getAll();
+
+        for (Object obj : result) {
+
+            MedicalRecord record =
+                    (MedicalRecord) obj;
+
+            record.displayInfo();
+
+            System.out.println("-------------------");
+        }
+    }
+
+    private void searchRecords() {
+
+        String keyword =
+                readText("Search: ");
+
+        Object[] result =
+                recordService.search(keyword);
+
+        for (Object obj : result) {
+
+            MedicalRecord record =
+                    (MedicalRecord) obj;
+
+            record.displayInfo();
+
+            System.out.println("-------------------");
+        }
+    }
+
+    private void removeRecord() {
+
+        String id =
+                readText("Record ID: ");
+
+        recordService.removeById(id);
+
+        System.out.println("Record removed.");
+    }
+
+    private void listRecordsByPatient() {
+
+        String patientId =
+                readText("Patient ID: ");
+
+        Object[] result =
+                recordService.listByPatient(patientId);
+
+        for (Object obj : result) {
+
+            MedicalRecord record =
+                    (MedicalRecord) obj;
+
+            record.displayInfo();
+        }
+    }
+
+    // =========================
+    // REPORTS
+    // =========================
+
+    private void reportsMenu() {
+
+        System.out.println();
+        System.out.println("===== REPORTS =====");
+
+        System.out.println(
+                "Total Patients: "
+                        + patientService.getAll().length
+        );
+
+        System.out.println(
+                "Total Doctors: "
+                        + doctorService.getAll().length
+        );
+
+        System.out.println(
+                "Total Nurses: "
+                        + nurseService.getAll().length
+        );
+
+        System.out.println(
+                "Total Appointments: "
+                        + appointmentService.getAll().length
+        );
+
+        System.out.println(
+                "Total Medical Records: "
+                        + recordService.getAll().length
+        );
+
+        System.out.println(
+                "Outstanding Balance: "
+                        + patientService.totalOutstanding()
+        );
+
+        System.out.println(
+                "Confidential Records: "
+                        + recordService.countConfidential()
+        );
+    }
+
+    // =========================
+    // INPUT METHODS
+    // =========================
+
+    private String readText(String message) {
+
+        System.out.print(message);
+
+        return scanner.nextLine();
+    }
+
+    private int readInt(String message) {
+
+        System.out.print(message);
+
+        return Integer.parseInt(scanner.nextLine());
+    }
+
+    private double readDouble(String message) {
+
+        System.out.print(message);
+
+        return Double.parseDouble(scanner.nextLine());
     }
 }
-
